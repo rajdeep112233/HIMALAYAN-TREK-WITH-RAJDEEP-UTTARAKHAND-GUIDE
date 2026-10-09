@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-labelledby="logoTitle logoDesc">
+  <title id="logoTitle">Himalayan Wildlife Journey logo</title>
+  <desc id="logoDesc">A rising sun behind layered Himalayan peaks</desc>
+  <circle cx="48" cy="48" r="43" fill="#102018" stroke="#f0cf91" stroke-width="3"/>
+  <circle cx="67" cy="29" r="9" fill="#d7a84a"/>
+  <path d="M14 69 34 43l10 13 10-15 28 28H14Z" fill="#96b77d"/>
+  <path d="m27 52 7-9 10 13 10-15 6 6-8 8-8-5-9 10Z" fill="#eef2e9"/>
+  <path d="M14 69h68" fill="none" stroke="#f0cf91" stroke-linecap="round" stroke-width="3"/>
+</svg>
