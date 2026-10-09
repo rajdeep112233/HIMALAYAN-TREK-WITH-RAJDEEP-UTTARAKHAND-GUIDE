@@ -1,0 +1,16 @@
+/* Existing responsive rules remain in style.css; these rules cover the new page templates. */
+@media (max-width: 760px) {
+	.page-intro {
+		padding-top: 120px;
+		padding-bottom: 56px;
+	}
+
+	.page-content-grid,
+	.feature-grid,
+	.destination-grid,
+	.gallery-page-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+
