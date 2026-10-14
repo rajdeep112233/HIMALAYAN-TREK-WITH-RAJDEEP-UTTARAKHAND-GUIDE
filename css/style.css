@@ -433,9 +433,9 @@ textarea:focus-visible {
 
 .hero h1 {
   font-family: "Manrope", "Avenir Next", sans-serif;
-  font-size: clamp(72px, 8vw, 112px);
-  line-height: .88;
-  letter-spacing: 1px;
+  font-size: clamp(2rem, 7.5vw, 5.25rem);
+  line-height: .92;
+  letter-spacing: .04em;
   color: var(--text);
   text-shadow: 0 4px 16px rgba(0,0,0,.65);
 }
@@ -2766,7 +2766,8 @@ video-modal,
   }
 
   .hero h1 {
-    font-size: clamp(58px, 18vw, 82px);
+    font-size: clamp(2rem, 7.5vw, 5.25rem);
+    max-width: calc(100vw - 40px);
   }
 
   .hero h2 {

@@ -10,7 +10,7 @@ A responsive, static website for Himalayan trek guiding, bird watching, and trav
 - `js/` — site interactions and booking scripts
 - `images/` — existing photos, backgrounds, and brand images
 
-The site uses relative paths so its pages and local assets work under the GitHub Pages project URL. Icons and fonts are currently loaded from Font Awesome and Google Fonts CDNs; an internet connection is needed for those external resources.
+The site uses relative paths so its pages and local assets work under a GitHub Pages project site. Icons and fonts are currently loaded from Font Awesome and Google Fonts CDNs; an internet connection is needed for those external resources.
 
 ## Run locally
 
@@ -33,6 +33,6 @@ Open `index.html` in a browser. No build step or package installation is require
 3. In the repository, open **Settings → Pages**.
 4. Under **Build and deployment**, select **Deploy from a branch**.
 5. Set the branch to **main** and the folder to **/(root)**, then save.
-6. After GitHub Pages finishes publishing, visit <https://rajdeep112233.github.io/himalayan-trek-with-rajdeep/>.
+6. After GitHub Pages finishes publishing, visit the site address shown in repository settings.
 
 No backend, build process, or dependency installation is required.
