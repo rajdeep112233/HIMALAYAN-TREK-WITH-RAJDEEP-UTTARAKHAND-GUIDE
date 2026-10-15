@@ -41,6 +41,22 @@ if (menuToggle && mainNav) {
       closeMainNav();
     });
   });
+
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && mainNav.classList.contains("open")) {
+      closeMainNav(true);
+    }
+  });
+
+  document.addEventListener("click", event => {
+    if (
+      mainNav.classList.contains("open") &&
+      !mainNav.contains(event.target) &&
+      !menuToggle.contains(event.target)
+    ) {
+      closeMainNav();
+    }
+  });
 }
 
 const navLinks = Array.from(document.querySelectorAll(".main-nav a:not(.nav-cta)"))
@@ -64,56 +80,6 @@ if ("IntersectionObserver" in window && sections.length && navLinks.length) {
   );
 
   sections.forEach(section => observer.observe(section));
-}
-
-const reviews = [
-  {
-    text: "“Rajdeep is an excellent guide. He knows the mountains like the back of his hand and made our trek safe and memorable!”",
-    name: "Naturalist Lakshman Singh"
-  },
-  {
-    text: "“A calm and knowledgeable guide who made our Himalayan trip comfortable, informative and genuinely enjoyable.”",
-    name: "Vicram Singh"
-  },
-  {
-    text: "“The route planning and local knowledge were excellent. We discovered beautiful places away from the crowded trails.”",
-    name: "Jaybardhan Shah"
-  }
-];
-
-let reviewIndex = 0;
-const reviewText = document.getElementById("reviewText");
-const reviewName = document.getElementById("reviewName");
-
-function renderReview() {
-  if (reviewText && reviewName && reviews[reviewIndex]) {
-    reviewText.textContent = reviews[reviewIndex].text;
-    reviewName.textContent = reviews[reviewIndex].name;
-  }
-}
-
-const prevReview = document.getElementById("prevReview");
-const nextReview = document.getElementById("nextReview");
-
-if (prevReview) {
-  prevReview.addEventListener("click", () => {
-    reviewIndex = (reviewIndex - 1 + reviews.length) % reviews.length;
-    renderReview();
-  });
-}
-
-if (nextReview) {
-  nextReview.addEventListener("click", () => {
-    reviewIndex = (reviewIndex + 1) % reviews.length;
-    renderReview();
-  });
-}
-
-if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-  setInterval(() => {
-    reviewIndex = (reviewIndex + 1) % reviews.length;
-    renderReview();
-  }, 5000);
 }
 
 const videoModal = document.getElementById("videoModal");
@@ -145,19 +111,50 @@ if (videoModal) {
 }
 
 const galleryItems = [
-  { src: "images/chandrashila.jpeg", alt: "Chandrashila summit trail in Himalayan mountains", title: "Above the Clouds", location: "Chopta, Uttarakhand", category: "Mountains", categories: ["Trekking", "Mountains", "Trek Experiences"], description: "A calm sunrise climb above the alpine ridgelines, where the Himalayan sky opens wide and the trail feels endless." },
-  { src: "images/kartik swami.jpeg", alt: "Kartik Swami temple trail in Rudraprayag", title: "Kartik Swami", location: "Rudraprayag, Uttarakhand", category: "Trekking", categories: ["Trekking", "Nature", "Villages", "Trek Experiences"], description: "The temple trail offers a spiritual climb, valley views and a deeply memorable Himalayan ascent." },
-  { src: "images/kedarnath.jpeg", alt: "Kedarnath trek route across steep Himalayan terrain", title: "Kedarnath", location: "Kedarnath Valley, Uttarakhand", category: "Trekking", categories: ["Trekking", "Mountains", "Nature", "Trek Experiences"], description: "A sacred Himalayan route shaped by faith, snowline weather and unforgettable mountain drama." },
-  { src: "images/badhanitaal.jpeg", alt: "Badhani Tal lake surrounded by forests and hills", title: "Badhani Tal", location: "Chamoli, Uttarakhand", category: "Nature", categories: ["Nature", "Trekking", "Trek Experiences"], description: "Quiet lakeside moments surrounded by forest edges and wide Himalayan horizons." },
-  { src: "images/madhyameshwar.jpeg", alt: "Madhyameshwar valley in a forested Himalayan landscape", title: "Madhyameshwar", location: "Madhyameshwar Valley, Uttarakhand", category: "Villages", categories: ["Nature", "Villages", "Trekking", "Trek Experiences"], description: "A scenic route through green valleys and village landscapes where mountain living feels close and real." },
-  { src: "images/triyuginarayan.jpeg", alt: "Triyuginarayan sacred valley and Himalayan ridges", title: "Triyuginarayan", location: "Triyuginarayan, Uttarakhand", category: "Villages", categories: ["Villages", "Mountains", "Nature", "Trek Experiences"], description: "The valley carries stories, temples and wide open views framed by ancient Himalayan geography." },
-  { src: "images/tungnath.jpeg", alt: "Tungnath ridge view with mountain backdrop", title: "Tungnath Ridge", location: "Tungnath, Uttarakhand", category: "Mountains", categories: ["Trekking", "Mountains", "Nature"], description: "High-altitude trails and open ridgelines create some of the most scenic Himalayan moments." },
-  { src: "images/Rajdeep.jpeg", alt: "Rajdeep standing in the Himalayan landscape", title: "Guide & Trails", location: "Rudraprayag, Uttarakhand", category: "Wildlife", categories: ["Wildlife", "Nature", "Bird Watching"], description: "A portrait of local guiding, mountain knowledge and the personal connection to Himalayan trails." },
-  { src: "images/rajdeep-portrait.jpeg", alt: "Portrait of Rajdeep Himalayan guide", title: "Local Story", location: "Kamsal, Uttarakhand", category: "Villages", categories: ["Villages", "Nature", "Wildlife"], description: "A quiet look into the local Himalayan storyteller behind every trail and guiding experience." },
-  { src: "images/deoriatal.jpeg", alt: "Deoriatal lake with mountain reflections", title: "Deoriatal", location: "Deoria Tal, Uttarakhand", category: "Nature", categories: ["Nature", "Trekking", "Trek Experiences"], description: "A still mountain lake, clean air and a reflection of the sky that feels almost unreal." },
-  { src: "images/golu.jpeg", alt: "Birding trail in the Himalayan forest", title: "Birding Morning", location: "Forest trails, Uttarakhand", category: "Bird Watching", categories: ["Bird Watching", "Wildlife", "Nature"], description: "The first light invites Himalayan birds to move through the forest canopy and river edges." },
-  { src: "images/kkkk.jpeg", alt: "Himalayan valley sunrise with warm daylight", title: "Early Morning Glow", location: "Upper Himalayas, Uttarakhand", category: "Nature", categories: ["Nature", "Mountains", "Trek Experiences"], description: "Morning light lengthens shadows and turns the valley into a quiet, golden Himalayan theatre." }
+  { src: "images/chandrashila.jpeg", alt: "Mountain trail photograph associated with the Chopta–Tungnath–Chandrashila trek", title: "Chandrashila Trek", location: "Exact photo location to be confirmed", category: "Himalayan Treks", categories: ["Himalayan Treks", "Mountain Landscapes", "Camping and Trekking Experiences"], description: "A photograph from the existing trek collection. Exact photo location and date are to be confirmed.", trekKey: "chopta" },
+  { src: "images/kartik swami.jpeg", alt: "Kartik Swami trek photograph from the existing collection", title: "Kartik Swami Trek", location: "Exact photo location to be confirmed", category: "Himalayan Treks", categories: ["Himalayan Treks", "Camping and Trekking Experiences", "Local Villages and Himalayan Culture"], description: "A photograph associated with the Kartik Swami route. Exact photo location and date are to be confirmed.", trekKey: "kartik" },
+  { src: "images/kedarnath.jpeg", alt: "Kedarnath trek photograph from the existing collection", title: "Kedarnath Trek", location: "Exact photo location to be confirmed", category: "Himalayan Treks", categories: ["Himalayan Treks", "Mountain Landscapes", "Camping and Trekking Experiences", "Local Villages and Himalayan Culture"], description: "A photograph associated with the Kedarnath route. Exact photo location and date are to be confirmed.", trekKey: "kedarnath" },
+  { src: "images/badhanitaal.jpeg", alt: "Badhani Tal landscape photograph from the existing collection", title: "Badhani Tal", location: "Exact photo location to be confirmed", category: "Mountain Landscapes", categories: ["Himalayan Treks", "Mountain Landscapes", "Wildlife and Nature", "Camping and Trekking Experiences"], description: "A landscape photograph associated with Badhani Tal. Exact photo location and date are to be confirmed.", trekKey: "badhani" },
+  { src: "images/madhyameshwar.jpeg", alt: "Madhyamaheshwar trek landscape photograph from the existing collection", title: "Madhyamaheshwar Trek", location: "Exact photo location to be confirmed", category: "Himalayan Treks", categories: ["Himalayan Treks", "Mountain Landscapes", "Camping and Trekking Experiences", "Local Villages and Himalayan Culture"], description: "A photograph associated with the Madhyamaheshwar route. Exact photo location and date are to be confirmed.", trekKey: "madhy" },
+  { src: "images/triyuginarayan.jpeg", alt: "Triyuginarayan trek photograph from the existing collection", title: "Triyuginarayan Trek", location: "Exact photo location to be confirmed", category: "Himalayan Treks", categories: ["Himalayan Treks", "Mountain Landscapes", "Camping and Trekking Experiences", "Local Villages and Himalayan Culture"], description: "A photograph associated with the Triyuginarayan route. Exact photo location and date are to be confirmed.", trekKey: "triyu" },
+  { src: "images/tungnath.jpeg", alt: "Tungnath mountain and trail photograph from the existing collection", title: "Tungnath Trail", location: "Exact photo location to be confirmed", category: "Mountain Landscapes", categories: ["Himalayan Treks", "Mountain Landscapes", "Camping and Trekking Experiences"], description: "A mountain photograph from the existing trekking collection. Exact photo location and date are to be confirmed.", trekKey: "chopta" },
+  { src: "images/Rajdeep.jpeg", alt: "Photograph of Rajdeep from the existing website collection", title: "Rajdeep", location: "Exact photo location to be confirmed", category: "Himalayan Treks", categories: ["Himalayan Treks", "Camping and Trekking Experiences"], description: "A guide photograph from the existing website collection. Exact photo location and date are to be confirmed." },
+  { src: "images/rajdeep-portrait.jpeg", alt: "Portrait photograph of Rajdeep from the existing website collection", title: "Rajdeep", location: "Exact photo location to be confirmed", category: "Himalayan Treks", categories: ["Himalayan Treks", "Camping and Trekking Experiences"], description: "A guide portrait from the existing website collection. Exact photo location and date are to be confirmed." },
+  { src: "images/deoriatal.jpeg", alt: "Deoriatal trek landscape photograph from the existing collection", title: "Deoriatal Trek", location: "Exact photo location to be confirmed", category: "Mountain Landscapes", categories: ["Himalayan Treks", "Mountain Landscapes", "Wildlife and Nature", "Camping and Trekking Experiences"], description: "A photograph associated with the Deoriatal route. Exact photo location and date are to be confirmed.", trekKey: "deoriatal" },
+  { src: "images/golu.jpeg", alt: "Bird and nature photograph from the existing collection; identification unverified", title: "Bird Photo", location: "Exact photo location to be confirmed", category: "Bird Watching", categories: ["Bird Watching", "Wildlife and Nature"], description: "Bird species, scientific name, location, date and photo provenance are to be confirmed." },
+  { src: "images/kkkk.jpeg", alt: "Himalayan landscape photograph from the existing collection", title: "Mountain Landscape", location: "Exact photo location to be confirmed", category: "Mountain Landscapes", categories: ["Mountain Landscapes", "Wildlife and Nature", "Camping and Trekking Experiences"], description: "A landscape photograph from the existing collection. Exact location and date are to be confirmed." },
+  { src: "images/aerial insectivores.jpeg", alt: "Bird photograph from the existing collection; species identification unverified", title: "Bird Photo", location: "Exact photo location to be confirmed", category: "Bird Watching", categories: ["Bird Watching", "Wildlife and Nature"], description: "Bird species, scientific name, location, date and photo provenance are to be confirmed." },
+  { src: "images/bird that live in bushes.jpeg", alt: "Bird photograph from the existing collection; species identification unverified", title: "Bird Photo", location: "Exact photo location to be confirmed", category: "Bird Watching", categories: ["Bird Watching", "Wildlife and Nature"], description: "Bird species, scientific name, location, date and photo provenance are to be confirmed." },
+  { src: "images/bird that live in tree.jpeg", alt: "Bird photograph from the existing collection; species identification unverified", title: "Bird Photo", location: "Exact photo location to be confirmed", category: "Bird Watching", categories: ["Bird Watching", "Wildlife and Nature"], description: "Bird species, scientific name, location, date and photo provenance are to be confirmed." },
+  { src: "images/birds of prey.jpeg", alt: "Bird photograph from the existing collection; species identification unverified", title: "Bird Photo", location: "Exact photo location to be confirmed", category: "Bird Watching", categories: ["Bird Watching", "Wildlife and Nature"], description: "Bird species, scientific name, location, date and photo provenance are to be confirmed." },
+  { src: "images/ground-foraging birds.jpeg", alt: "Bird photograph from the existing collection; species identification unverified", title: "Bird Photo", location: "Exact photo location to be confirmed", category: "Bird Watching", categories: ["Bird Watching", "Wildlife and Nature"], description: "Bird species, scientific name, location, date and photo provenance are to be confirmed." },
+  { src: "images/himalayan monal.jpeg", alt: "Bird photograph from the existing collection; species identification unverified", title: "Bird Photo", location: "Exact photo location to be confirmed", category: "Bird Watching", categories: ["Bird Watching", "Wildlife and Nature"], description: "Bird species, scientific name, location, date and photo provenance are to be confirmed." },
+  { src: "images/water birds.jpeg", alt: "Bird photograph from the existing collection; species identification unverified", title: "Bird Photo", location: "Exact photo location to be confirmed", category: "Bird Watching", categories: ["Bird Watching", "Wildlife and Nature"], description: "Bird species, scientific name, location, date and photo provenance are to be confirmed." },
+  { src: "images/chandrabadhani temple.jpeg", alt: "Chandrabadni trek and temple photograph from the existing collection", title: "Chandrabadni Trek", location: "Exact photo location to be confirmed", category: "Himalayan Treks", categories: ["Himalayan Treks", "Mountain Landscapes", "Camping and Trekking Experiences", "Local Villages and Himalayan Culture"], description: "A photograph associated with the Chandrabadni route. Exact photo location and date are to be confirmed.", trekKey: "chandrabadhni" }
 ];
+
+const galleryImageDimensions = {
+  "images/chandrashila.jpeg": [720, 900],
+  "images/kartik swami.jpeg": [736, 919],
+  "images/kedarnath.jpeg": [736, 920],
+  "images/badhanitaal.jpeg": [1080, 1008],
+  "images/madhyameshwar.jpeg": [735, 919],
+  "images/triyuginarayan.jpeg": [678, 452],
+  "images/tungnath.jpeg": [736, 981],
+  "images/Rajdeep.jpeg": [1445, 739],
+  "images/rajdeep-portrait.jpeg": [1254, 1254],
+  "images/deoriatal.jpeg": [670, 430],
+  "images/golu.jpeg": [1088, 1445],
+  "images/kkkk.jpeg": [1280, 720],
+  "images/aerial insectivores.jpeg": [736, 552],
+  "images/bird that live in bushes.jpeg": [736, 487],
+  "images/bird that live in tree.jpeg": [628, 416],
+  "images/birds of prey.jpeg": [660, 449],
+  "images/ground-foraging birds.jpeg": [640, 457],
+  "images/himalayan monal.jpeg": [736, 552],
+  "images/water birds.jpeg": [1280, 853],
+  "images/chandrabadhani temple.jpeg": [1076, 1172]
+};
 
 const galleryModal = document.getElementById("galleryModal");
 const galleryViewerImage = document.getElementById("galleryViewerImage");
@@ -188,7 +185,9 @@ if (!masonryGallery && trekGalleryImages.length) {
     title: image.alt.replace(/ Trek$/, ""),
     location: "Uttarakhand",
     category: "Trek Experience",
-    description: "A view from the Himalayan trail collection."
+    description: "A view from the Himalayan trail collection.",
+    width: Number(image.getAttribute("width")) || image.naturalWidth,
+    height: Number(image.getAttribute("height")) || image.naturalHeight
   }));
 }
 
@@ -207,6 +206,7 @@ function renderGalleryCards(filter = "All") {
   if (!masonryGallery) return;
 
   masonryGallery.innerHTML = filteredGalleryItems.map((item, index) => {
+    const imageDimensions = galleryImageDimensions[item.src];
     const sizeClass = index === 0
       ? "masonry-card masonry-card--feature"
       : index === 1 || index === 3
@@ -216,27 +216,38 @@ function renderGalleryCards(filter = "All") {
           : "masonry-card";
 
     return `
-      <figure class="${sizeClass}" tabindex="0" role="button" aria-label="Open ${item.alt}" data-index="${index}">
-        <img src="${item.src}" alt="${item.alt}" loading="lazy" />
+      <figure class="${sizeClass}" data-index="${index}">
+        <button class="masonry-image-button" type="button" aria-label="Preview ${item.alt}">
+          <img src="${encodeURI(item.src)}" alt="${item.alt}" ${imageDimensions ? `width="${imageDimensions[0]}" height="${imageDimensions[1]}"` : ""} loading="lazy" decoding="async" />
+        </button>
         <figcaption class="masonry-caption">
           <span class="masonry-tag">${item.category}</span>
           <strong>${item.title}</strong>
           <small>${item.location}</small>
+          ${item.trekKey ? `<span class="masonry-card-links"><a href="treks.html?trek=${encodeURIComponent(item.trekKey)}">View trek details</a><a href="booking.html?trek=${encodeURIComponent(item.trekKey)}">Book this trek</a></span>` : ""}
         </figcaption>
-        <span class="masonry-eye" aria-hidden="true"><i class="fa-solid fa-eye"></i></span>
       </figure>
     `;
   }).join("");
 
-  masonryGallery.querySelectorAll(".masonry-card").forEach((card, index) => {
-    card.addEventListener("click", () => openGallery(index));
-    card.addEventListener("keydown", event => {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        openGallery(index);
-      }
-    });
+  masonryGallery.querySelectorAll(".masonry-image-button").forEach((button, index) => {
+    button.addEventListener("click", () => openGallery(index));
   });
+
+  const emptyMessage = gallerySection?.querySelector(".gallery-empty");
+  if (emptyMessage) {
+    emptyMessage.hidden = filteredGalleryItems.length > 0;
+  }
+
+  galleryFilterButtons.forEach(button => {
+    const isActive = button.dataset.filter === filter;
+    button.classList.toggle("active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
+  });
+
+  if (gallerySection) {
+    gallerySection.setAttribute("aria-label", `${filter} photographs`);
+  }
 }
 
 function updateLightboxImage() {
@@ -247,11 +258,33 @@ function updateLightboxImage() {
 
   galleryViewerImage.src = activeImage.src;
   galleryViewerImage.alt = activeImage.alt;
+  const imageDimensions = galleryImageDimensions[activeImage.src] ||
+    (activeImage.width && activeImage.height ? [activeImage.width, activeImage.height] : null);
+  if (imageDimensions) {
+    galleryViewerImage.width = imageDimensions[0];
+    galleryViewerImage.height = imageDimensions[1];
+  } else {
+    galleryViewerImage.removeAttribute("width");
+    galleryViewerImage.removeAttribute("height");
+  }
   galleryCounter.textContent = `${lightboxIndex + 1} / ${filteredGalleryItems.length}`;
   if (galleryViewerTitle) galleryViewerTitle.textContent = activeImage.title;
   if (galleryLocation) galleryLocation.textContent = activeImage.location;
   if (galleryCategory) galleryCategory.textContent = activeImage.category;
-  if (galleryDescription) galleryDescription.textContent = activeImage.description;
+  if (galleryDescription) {
+    galleryDescription.textContent = activeImage.description;
+    const detailsLink = document.getElementById("galleryTrekDetails");
+    const bookLink = document.getElementById("galleryBookTrek");
+    if (detailsLink && bookLink && activeImage.trekKey) {
+      detailsLink.href = `treks.html?trek=${encodeURIComponent(activeImage.trekKey)}`;
+      bookLink.href = `booking.html?trek=${encodeURIComponent(activeImage.trekKey)}`;
+      detailsLink.hidden = false;
+      bookLink.hidden = false;
+    } else {
+      if (detailsLink) detailsLink.hidden = true;
+      if (bookLink) bookLink.hidden = true;
+    }
+  }
 }
 
 function openGallery(index = 0) {
@@ -325,7 +358,8 @@ document.addEventListener("keydown", event => {
   if (event.key === "ArrowRight") openGallery(lightboxIndex + 1);
 
   if (event.key === "Tab" && galleryViewer) {
-    const focusable = Array.from(galleryViewer.querySelectorAll("button, [href], input, select, textarea, [tabindex]:not([tabindex=\"-1\"])"));
+    const focusable = Array.from(galleryViewer.querySelectorAll("button, [href], input, select, textarea, [tabindex]:not([tabindex=\"-1\"])"))
+      .filter(element => !element.hasAttribute("hidden") && element.getClientRects().length > 0);
     if (!focusable.length) return;
 
     const first = focusable[0];
@@ -341,74 +375,6 @@ document.addEventListener("keydown", event => {
 });
 
 renderGalleryCards(activeGalleryFilter);
-
-const bookingForm = document.getElementById("bookingForm");
-const toast = document.getElementById("toast");
-const peopleInput = document.getElementById("people");
-
-const WHATSAPP_NUMBER = "919084738318";
-
-if (peopleInput) {
-  peopleInput.addEventListener("input", () => peopleInput.setCustomValidity(""));
-}
-
-if (bookingForm && toast) {
-  bookingForm.addEventListener("submit", event => {
-    event.preventDefault();
-
-    const name = document.getElementById("name").value.trim();
-    const phone = document.getElementById("phone").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const trek = document.getElementById("trek").value;
-    const date = document.getElementById("date").value;
-    const people = Number(peopleInput.value);
-    const message = document.getElementById("message").value.trim();
-    const specialRequest = document.getElementById("specialRequest").value.trim();
-
-    if (!Number.isInteger(people) || people < 1 || people > 8) {
-      peopleInput.setCustomValidity("Please select between 1 and 8 trekkers.");
-      peopleInput.reportValidity();
-      return;
-    }
-
-    peopleInput.setCustomValidity("");
-
-    const whatsappMessage = `Hello Rajdeep, I want to book a Himalayan trek.
-
-Name: ${name}
-Phone: ${phone}
-Email: ${email || "Not provided"}
-Trek: ${trek}
-Date: ${date}
-Number of People: ${people}
-Message: ${message || "No additional message"}
-Special Request: ${specialRequest || "No special request"}
-
-Please share availability, inclusions and final price.`;
-
-    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`;
-    window.open(url, "_blank");
-
-    showToast("Opening WhatsApp booking...");
-  });
-}
-
-function showToast(message) {
-  if (!toast) return;
-
-  toast.textContent = message;
-  toast.classList.add("show");
-
-  setTimeout(() => {
-    toast.classList.remove("show");
-  }, 3000);
-}
-
-const dateInput = document.getElementById("date");
-if (dateInput) {
-  const today = new Date().toISOString().split("T")[0];
-  dateInput.min = today;
-}
 
 document.addEventListener("keydown", e => {
   if (e.key === "Escape") {

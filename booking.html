@@ -3,9 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Book a Himalayan trek or birding experience with Rajdeep." />
-  <title>Book Now | Himalayan Trek</title>
+  <meta name="description" content="Send a WhatsApp enquiry about a Himalayan trek or bird watching experience with Rajdeep in Uttarakhand. Submitting a request does not confirm a booking." />
+  <title>Trek &amp; Birding Enquiry | Rajdeep Uttarakhand Guide</title>
+  <meta name="robots" content="noindex,follow" />
+  <link rel="canonical" href="https://rajdeep112233.github.io/HIMALAYAN-TREK-WITH-RAJDEEP-UTTARAKHAND-GUIDE/booking.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="HIMALAYAN TREK WITH RAJDEEP | UTTARAKHAND GUIDE" />
+  <meta property="og:title" content="Trek &amp; Birding Enquiry | Rajdeep Uttarakhand Guide" />
+  <meta property="og:description" content="Send a WhatsApp enquiry about a Himalayan trek or bird watching experience with Rajdeep in Uttarakhand." />
+  <meta property="og:url" content="https://rajdeep112233.github.io/HIMALAYAN-TREK-WITH-RAJDEEP-UTTARAKHAND-GUIDE/booking.html" />
+  <meta property="og:image" content="https://rajdeep112233.github.io/HIMALAYAN-TREK-WITH-RAJDEEP-UTTARAKHAND-GUIDE/images/Rajdeep.jpeg" />
+  <meta property="og:image:alt" content="Rajdeep in the Uttarakhand Himalayan landscape" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Trek &amp; Birding Enquiry | Rajdeep Uttarakhand Guide" />
+  <meta name="twitter:description" content="Send an enquiry about a Himalayan trek or bird watching experience in Uttarakhand." />
+  <meta name="twitter:image" content="https://rajdeep112233.github.io/HIMALAYAN-TREK-WITH-RAJDEEP-UTTARAKHAND-GUIDE/images/Rajdeep.jpeg" />
   <link rel="icon" href="images/himalayan.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@500;600;700;800&amp;display=swap" />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/responsive.css" />
@@ -14,10 +31,10 @@
   <header class="site-header">
     <div class="container nav-wrap">
       <a href="index.html" class="brand">
-        <img class="brand-mark" src="images/himalayan.png" alt="Himalayan Trek logo" />
+        <img class="brand-mark" src="images/himalayan.png" alt="Himalayan Trek by Rajdeep logo" width="1254" height="1254" decoding="async" />
         <span>
-          <strong>HIMALAYAN TREK</strong>
-          <small>BY RAJDEEP</small>
+          <strong>HIMALAYAN WILDLIFE</strong>
+          <small>JOURNEY</small>
         </span>
       </a>
 
@@ -26,11 +43,14 @@
       </button>
 
       <nav class="main-nav" id="mainNav">
+        <a href="index.html#home">HOME</a>
         <a href="index.html#about">ABOUT</a>
-        <a href="treks.html">TREKS</a>
-        <a href="bird-watching.html">BIRD WATCHING</a>
-        <a href="contact.html">CONTACT</a>
-        <a class="active nav-cta" href="booking.html">BOOK NOW</a>
+        <a href="index.html#treks">TREKS</a>
+        <a href="index.html#bird-watching">BIRD WATCHING</a>
+        <a href="index.html#gallery">GALLERY</a>
+        <a href="index.html#faq">FAQ</a>
+        <a href="index.html#contact">CONTACT</a>
+        <a class="nav-cta" href="booking.html">PLAN A TRIP</a>
       </nav>
     </div>
   </header>
@@ -40,7 +60,7 @@
       <div class="container">
         <span class="section-kicker">LET'S PLAN TOGETHER</span>
         <h1>BOOK NOW</h1>
-        <p>Tell us what your Himalayan journey looks like. We’ll help you plan the right route, dates and support for your group.</p>
+        <p>Share your preferred experience and travel details. This form opens a WhatsApp enquiry; it does not reserve a place or confirm availability.</p>
       </div>
     </section>
 
@@ -50,7 +70,7 @@
           <div class="booking-form-heading">
             <span class="section-kicker">TREK &amp; TOUR INQUIRY</span>
             <h2>Start planning your journey</h2>
-            <p>Share a few details and Rajdeep will be in touch to help shape your trip.</p>
+            <p>Required fields are marked <span aria-hidden="true">*</span>. Your request will be sent to WhatsApp for you to review and send.</p>
           </div>
 
           <form id="bookingForm" class="booking-inquiry-form" novalidate>
@@ -61,28 +81,48 @@
               </div>
 
               <div class="booking-field">
-                <label for="phone">Phone number <span aria-hidden="true">*</span></label>
-                <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" autocomplete="tel" inputmode="tel" required />
+                <label for="phone">Mobile number <span aria-hidden="true">*</span></label>
+                <input type="tel" id="phone" name="phone" placeholder="Enter your mobile number" autocomplete="tel" inputmode="tel" maxlength="24" aria-describedby="phoneHint" required />
+                <small id="phoneHint">Include your country code if you are outside India.</small>
               </div>
 
               <div class="booking-field">
-                <label for="email">Email <span aria-hidden="true">*</span></label>
-                <input type="email" id="email" name="email" placeholder="Enter your email address" autocomplete="email" required />
+                <label for="email">Email address <span class="booking-optional">(optional)</span></label>
+                <input type="email" id="email" name="email" placeholder="Enter your email address" autocomplete="email" />
               </div>
 
               <div class="booking-field">
                 <label for="trek">Select trek or tour <span aria-hidden="true">*</span></label>
                 <select id="trek" name="trek" required>
                   <option value="" disabled selected>Select a trek or tour</option>
-                  <option>Kartik Swami Temple Trek</option>
-                  <option>Chopta – Tungnath – Chandrashila Trek</option>
-                  <option>Madhyamaheshwar Trek</option>
-                  <option>Kedarnath Trek</option>
-                  <option>Deoria Tal Trek</option>
-                  <option>Badhani Tal Trek</option>
-                  <option>Triyuginarayan Trek</option>
-                  <option>Bird Watching Tour</option>
-                  <option>Custom Trek / Tour</option>
+                  <optgroup label="Trekking">
+                    <option value="Kartik Swami Trek" data-price="₹4,999" data-duration="2 days">Kartik Swami Trek</option>
+                    <option value="Chopta–Tungnath–Chandrashila Trek" data-price="₹6,999" data-duration="3 days">Chopta–Tungnath–Chandrashila Trek</option>
+                    <option value="Kedarnath Trek" data-price="₹8,499" data-duration="4 days">Kedarnath Trek</option>
+                    <option value="Madhyamaheshwar Trek" data-price="₹6,499" data-duration="3 days">Madhyamaheshwar Trek</option>
+                    <option value="Deoriatal Trek" data-price="₹4,999" data-duration="2 days">Deoriatal Trek</option>
+                    <option value="Badhani Tal Trek" data-price="₹5,499" data-duration="2 days">Badhani Tal Trek</option>
+                    <option value="Triyuginarayan Trek" data-price="₹6,999" data-duration="3 days">Triyuginarayan Trek</option>
+                    <option value="Chandrabadni Trek" data-price="₹6,499" data-duration="3 days">Chandrabadni Trek</option>
+                  </optgroup>
+                  <optgroup label="Other experiences">
+                    <option value="Bird Watching Tour">Bird Watching Tour</option>
+                    <option value="Nature Walk">Nature Walk</option>
+                    <option value="Wildlife Observation">Wildlife Observation</option>
+                    <option value="Local Village Tour">Local Village Tour</option>
+                    <option value="Custom Trek / Tour">Custom Trek / Tour</option>
+                  </optgroup>
+                </select>
+              </div>
+
+              <div class="booking-field">
+                <label for="bookingType">Booking type <span aria-hidden="true">*</span></label>
+                <select id="bookingType" name="bookingType" required>
+                  <option value="" disabled selected>Select booking type</option>
+                  <option value="Trekking">Trekking</option>
+                  <option value="Bird Watching">Bird Watching</option>
+                  <option value="Nature Walk">Nature Walk</option>
+                  <option value="Village Tour">Village Tour</option>
                 </select>
               </div>
 
@@ -126,25 +166,47 @@
               </div>
 
               <div class="booking-field booking-field-wide">
-                <label for="specialRequest">Special requirements</label>
-                <textarea id="specialRequest" name="specialRequest" rows="3" placeholder="Mention any medical, dietary, accessibility, or other special requirements."></textarea>
+                <label for="specialRequest">Additional requests</label>
+                <textarea id="specialRequest" name="specialRequest" rows="3" placeholder="Share any practical requests for planning your experience. Avoid sending sensitive or payment information."></textarea>
               </div>
 
-              <div class="booking-field booking-field-wide">
-                <label for="message">Message</label>
-                <textarea id="message" name="message" rows="3" placeholder="Tell us about your trek or tour requirements..."></textarea>
-              </div>
             </div>
 
-            <button class="btn btn-primary booking-submit" type="submit">
-              <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Send Booking Inquiry
+            <div class="booking-consent">
+              <input type="checkbox" id="privacyConsent" name="privacyConsent" value="Agreed" required />
+              <label for="privacyConsent">I agree that my details may be used to respond to this enquiry, as described in the <a href="privacy.html">Privacy Policy</a>. My request will be shared through WhatsApp. <span aria-hidden="true">*</span></label>
+            </div>
+
+            <button class="btn btn-primary booking-submit" id="bookingSubmit" type="submit">
+              <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Book via WhatsApp
             </button>
+            <button class="booking-new-inquiry" id="newInquiry" type="button" hidden>Start another enquiry</button>
             <p class="booking-status" id="bookingStatus" role="status" aria-live="polite" tabindex="-1" hidden></p>
-            <p class="booking-note">Submitting this form does not confirm your booking. Our team will contact you to confirm availability, pricing, food, accommodation, transportation, and final booking details.</p>
+            <p class="booking-note"><i class="fa-solid fa-circle-info" aria-hidden="true"></i><span>This is an enquiry only; no booking is held or confirmed until Rajdeep confirms the arrangements directly. No online payment is taken on this website.</span></p>
+            <p class="booking-policy-note">The published Terms say a booking is confirmed after the required advance is received, eligible refunds may take 10–20 working days, and unused services or voluntary withdrawal during a trek are not refundable. They do not specify an advance amount, a cancellation notice deadline or rescheduling terms. Confirm the applicable terms directly before making any payment.</p>
+            <nav class="booking-policy-links" aria-label="Booking policies">
+              <a href="terms.html#cancellation-refund-policy">Cancellation Policy</a>
+              <a href="terms.html#cancellation-refund-policy">Refund Policy</a>
+              <a href="privacy.html">Privacy Policy</a>
+              <a href="terms.html">Terms &amp; Conditions</a>
+            </nav>
           </form>
         </div>
 
         <aside class="booking-trust-panel" aria-labelledby="bookingTrustTitle">
+          <div class="booking-summary" aria-labelledby="bookingSummaryTitle" aria-live="polite">
+            <span class="section-kicker">YOUR ENQUIRY</span>
+            <h2 id="bookingSummaryTitle">Booking summary</h2>
+            <dl>
+              <div><dt>Trek or tour</dt><dd id="summaryService">Not selected</dd></div>
+              <div><dt>Booking type</dt><dd id="summaryType">Not selected</dd></div>
+              <div><dt>Preferred date</dt><dd id="summaryDate">Not selected</dd></div>
+              <div><dt>Participants</dt><dd id="summaryPeople">1</dd></div>
+              <div><dt>Package price</dt><dd id="summaryPrice">Details to be confirmed</dd></div>
+              <div><dt>Listed duration</dt><dd id="summaryDuration">Details to be confirmed</dd></div>
+            </dl>
+            <p id="summaryBasis">Price basis (per person or group), inclusions and exclusions: Details to be confirmed. No total is calculated.</p>
+          </div>
           <span class="section-kicker">YOUR JOURNEY, IN GOOD HANDS</span>
           <h2 id="bookingTrustTitle">Why book with us?</h2>
           <ul>

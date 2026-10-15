@@ -3,8 +3,6 @@
    Main stylesheet
 ================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
-
 :root {
   --bg: #0b2118;
   --panel: #123326;
@@ -60,6 +58,12 @@ img {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--orange-light);
+  outline-offset: 3px;
+  border-radius: 4px;
 }
 
 button,
@@ -480,6 +484,7 @@ textarea:focus-visible {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  min-height: 44px;
   border-radius: 7px;
   font-size: 11px;
   font-weight: 800;
@@ -1129,6 +1134,7 @@ textarea:focus-visible {
 }
 
 .filter-btn {
+  min-height: 44px;
   border: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.02);
   color: var(--soft);
@@ -1503,6 +1509,7 @@ textarea:focus-visible {
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  min-height: 44px;
   padding: 10px 14px;
   border-radius: 999px;
   border: 1px solid var(--line);
@@ -1679,26 +1686,129 @@ textarea:focus-visible {
 
 .faq-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(180px, 1fr));
-  gap: 16px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+  max-width: 920px;
+  margin: 0 auto;
 }
 
 .faq-item {
   border: 1px solid var(--line);
   background: var(--bg);
-  padding: 18px;
-  border-radius: 10px;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color .2s ease, background-color .2s ease;
 }
 
-.faq-item h3 {
+.faq-item:hover,
+.faq-item[open] {
+  border-color: rgba(215, 168, 74, .55);
+}
+
+.faq-item summary {
+  position: relative;
+  padding: 18px 52px 18px 20px;
   color: var(--text);
   font-size: 15px;
-  margin-bottom: 8px;
+  font-weight: 700;
+  line-height: 1.5;
+  cursor: pointer;
+  list-style: none;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary::after {
+  content: "+";
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  color: var(--orange-light);
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1;
+  transform: translateY(-50%);
+}
+
+.faq-item[open] summary::after {
+  content: "−";
+}
+
+.faq-item summary:focus-visible,
+.faq-policy-links a:focus-visible {
+  outline: 2px solid var(--orange-light);
+  outline-offset: -3px;
 }
 
 .faq-item p {
+  margin: 0;
+  padding: 0 20px 20px;
   color: var(--muted);
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+.faq-item p a {
+  color: var(--orange-light);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.faq-policy-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px 22px;
+  margin: 26px auto 0;
+}
+
+.faq-policy-links a:not(.small-btn) {
+  color: var(--soft);
   font-size: 12px;
+  text-decoration: underline;
+  text-decoration-color: rgba(215, 168, 74, .5);
+  text-underline-offset: 4px;
+}
+
+.faq-policy-links a:not(.small-btn):hover {
+  color: var(--orange-light);
+}
+
+@media (max-width: 600px) {
+  .faq-grid {
+    gap: 9px;
+  }
+
+  .faq-item summary {
+    padding: 16px 46px 16px 16px;
+    font-size: 14px;
+  }
+
+  .faq-item summary::after {
+    right: 16px;
+  }
+
+  .faq-item p {
+    padding: 0 16px 17px;
+    font-size: 12px;
+  }
+
+  .faq-policy-links {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 13px;
+  }
+
+  .faq-policy-links a:not(.small-btn) {
+    text-align: center;
+  }
+
+  .faq-policy-links .small-btn {
+    align-self: center;
+  }
 }
 
 .site-footer {
@@ -2242,8 +2352,8 @@ textarea:focus-visible {
 
 .footer-social a {
   display: grid;
-  width: 34px;
-  height: 34px;
+  width: 44px;
+  height: 44px;
   place-items: center;
   border: 1px solid var(--line);
   border-radius: 50%;
@@ -2335,8 +2445,8 @@ textarea:focus-visible {
 
 .gallery-close {
   display: grid;
-  width: 38px;
-  height: 38px;
+  width: 44px;
+  height: 44px;
   place-items: center;
   border: 1px solid var(--line);
   border-radius: 50%;
@@ -2377,8 +2487,8 @@ textarea:focus-visible {
   top: 50%;
   z-index: 2;
   display: grid;
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   place-items: center;
   border: 1px solid rgba(255,255,255,.28);
   border-radius: 50%;
@@ -2508,6 +2618,983 @@ video-modal,
 
 .toast.show {
   display: block;
+}
+
+/* Consistent trek card and verified-detail presentation */
+.trek-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  align-items: stretch;
+}
+
+.content-section .trek-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.trek-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: linear-gradient(155deg, rgba(27, 73, 55, .96), rgba(12, 37, 26, .98));
+  box-shadow: 0 16px 34px rgba(2, 15, 9, .24);
+  transition: transform .24s ease, border-color .24s ease, box-shadow .24s ease;
+}
+
+.trek-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(184, 219, 226, .48);
+  box-shadow: 0 22px 42px rgba(2, 15, 9, .38);
+}
+
+.trek-card > img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  transition: transform .35s ease;
+}
+
+.trek-card:hover > img {
+  transform: scale(1.035);
+}
+
+.trek-info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 20px;
+}
+
+.trek-info h3 {
+  min-height: 3.2em;
+  margin: 0 0 12px;
+  color: var(--text);
+  font-family: "Manrope", sans-serif;
+  font-size: 1.13rem;
+  line-height: 1.45;
+}
+
+.trek-card-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.trek-card-facts span {
+  padding: 5px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--soft);
+  font-size: .78rem;
+}
+
+.trek-card-start {
+  margin-bottom: 14px;
+  color: var(--muted);
+  font-size: .85rem;
+}
+
+.trek-card-price {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: auto;
+  color: var(--orange-light);
+  font-size: 1.25rem;
+}
+
+.trek-card-price small {
+  color: var(--muted);
+  font-size: .72rem;
+  font-weight: 500;
+}
+
+.trek-card-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+  margin-top: 18px;
+}
+
+.trek-card-actions a {
+  display: grid;
+  min-height: 44px;
+  place-items: center;
+  padding: 8px 10px;
+  border: 1px solid var(--orange-light);
+  border-radius: 8px;
+  font-size: .78rem;
+  font-weight: 700;
+  text-align: center;
+  transition: color .2s ease, background-color .2s ease, transform .2s ease;
+}
+
+.trek-card-actions a:hover {
+  transform: translateY(-2px);
+}
+
+.trek-card-details {
+  color: var(--orange-light);
+}
+
+.trek-card-details:hover {
+  background: rgba(184, 219, 226, .12);
+}
+
+.trek-card-book {
+  background: var(--orange);
+  color: #fff;
+}
+
+.trek-card-book:hover {
+  background: var(--orange-dark);
+}
+
+.trek-details-content {
+  display: grid;
+  gap: 22px;
+  padding-block: 48px 72px;
+}
+
+.trek-detail-lead {
+  max-width: 650px;
+  color: var(--muted);
+  font-size: 1.06rem;
+}
+
+.trek-price-display {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-top: 20px;
+}
+
+.trek-price-display strong,
+.trek-price-line > strong {
+  color: var(--orange-light);
+  font-size: 1.65rem;
+}
+
+.trek-price-display span,
+.trek-price-line > span,
+.trek-booking-notice {
+  color: var(--muted);
+  font-size: .86rem;
+}
+
+.trek-booking-notice {
+  max-width: 620px;
+  margin-top: 16px;
+}
+
+.trek-information-card {
+  padding: clamp(20px, 4vw, 34px);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: linear-gradient(155deg, rgba(18, 51, 38, .92), rgba(10, 32, 22, .96));
+}
+
+.trek-information-card h2,
+.trek-contact-card h2 {
+  margin: 8px 0 14px;
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+  line-height: 1.25;
+}
+
+.trek-information-card > p,
+.trek-information-card p,
+.trek-contact-card p {
+  color: var(--muted);
+}
+
+.trek-facts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.trek-facts-grid > div,
+.trek-logistics > div {
+  display: grid;
+  gap: 4px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, .025);
+}
+
+.trek-facts-grid span,
+.trek-logistics dt {
+  color: var(--muted);
+  font-size: .78rem;
+}
+
+.trek-facts-grid strong,
+.trek-logistics dd {
+  color: var(--text);
+  font-size: .92rem;
+}
+
+.trek-itinerary,
+.trek-detail-list {
+  display: grid;
+  gap: 10px;
+  margin: 18px 0 0;
+  padding-left: 22px;
+  color: var(--muted);
+}
+
+.trek-itinerary li {
+  padding-left: 4px;
+}
+
+.trek-itinerary li strong,
+.trek-itinerary li span {
+  display: block;
+}
+
+.trek-itinerary li strong {
+  color: var(--orange-light);
+}
+
+.trek-logistics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.trek-inclusion-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+}
+
+.trek-price-line {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 16px 0;
+}
+
+.trek-faq-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.trek-faq-list details {
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.trek-faq-list summary {
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.trek-faq-list details p {
+  margin-top: 10px;
+  color: var(--muted);
+}
+
+.trek-photo-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.trek-photo-gallery img {
+  width: 100%;
+  max-height: 440px;
+  aspect-ratio: 4 / 3;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.trek-contact-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: clamp(22px, 4vw, 38px);
+  border: 1px solid rgba(184, 219, 226, .32);
+  border-radius: 16px;
+  background: linear-gradient(120deg, rgba(27, 73, 55, .94), rgba(12, 37, 26, .96));
+}
+
+.trek-contact-card > div > a {
+  display: block;
+  margin-top: 8px;
+  color: var(--orange-light);
+}
+
+.trek-contact-card .btn {
+  flex: 0 0 auto;
+}
+
+@media (max-width: 900px) {
+  .content-section .trek-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .content-section .trek-grid,
+  .trek-facts-grid,
+  .trek-logistics,
+  .trek-inclusion-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .trek-info h3 {
+    min-height: 0;
+  }
+
+  .trek-card > img {
+    height: 205px;
+  }
+
+  .trek-card-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .trek-contact-card {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trek-card,
+  .trek-card > img,
+  .trek-card-actions a {
+    transition: none;
+  }
+
+  .trek-card:hover,
+  .trek-card-actions a:hover {
+    transform: none;
+  }
+}
+
+/* About Rajdeep profile */
+#about {
+  background:
+    radial-gradient(circle at 8% 4%, rgba(133, 173, 136, .1), transparent 28%),
+    linear-gradient(180deg, rgba(18, 51, 38, .44), transparent 70%),
+    var(--bg);
+}
+
+.about-profile-layout {
+  display: grid;
+  gap: 48px;
+}
+
+.about-profile-hero {
+  display: grid;
+  grid-template-columns: minmax(250px, .8fr) minmax(0, 1.2fr);
+  align-items: center;
+  gap: clamp(28px, 5vw, 64px);
+}
+
+.about-profile-photo {
+  position: relative;
+  min-height: 420px;
+  overflow: hidden;
+  border: 1px solid rgba(184, 219, 226, .3);
+  border-radius: 18px;
+  background: var(--panel);
+  box-shadow: 0 24px 55px rgba(2, 15, 9, .34);
+}
+
+.about-profile-photo::after {
+  position: absolute;
+  inset: 40% 0 0;
+  background: linear-gradient(transparent, rgba(5, 20, 13, .78));
+  content: "";
+  pointer-events: none;
+}
+
+.about-profile-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 82% center;
+}
+
+.about-photo-caption {
+  position: absolute;
+  z-index: 1;
+  right: 18px;
+  bottom: 18px;
+  left: 18px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #fff;
+  font-size: .86rem;
+  font-weight: 600;
+}
+
+.about-photo-caption i {
+  color: var(--orange-light);
+}
+
+.about-profile-copy {
+  max-width: 760px;
+}
+
+.about-eyebrow,
+.about-card-kicker {
+  color: var(--orange-light);
+  font-size: .73rem;
+  font-weight: 800;
+  letter-spacing: 1.7px;
+  text-transform: uppercase;
+}
+
+.about-profile-copy h2 {
+  margin: 9px 0 5px;
+  color: var(--text);
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  line-height: 1.1;
+}
+
+.about-role {
+  margin: 0 0 20px !important;
+  color: var(--orange-light) !important;
+  font-size: 1.05rem !important;
+  font-weight: 700;
+}
+
+.about-profile-copy > p:not(.about-role) {
+  margin-top: 13px;
+  color: var(--muted);
+  font-size: .98rem;
+  line-height: 1.85;
+}
+
+.about-profile-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.about-profile-actions .btn {
+  font-size: .78rem;
+  letter-spacing: .2px;
+}
+
+.about-profile-actions .btn-outline {
+  border-color: rgba(184, 219, 226, .54);
+  color: var(--soft);
+}
+
+.about-contact-link {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 8px;
+  padding-inline: 8px;
+  color: var(--orange-light);
+  font-size: .83rem;
+  font-weight: 700;
+}
+
+.about-section-heading {
+  margin-bottom: 22px;
+}
+
+.about-section-heading > span {
+  color: var(--orange-light);
+  font-size: .7rem;
+  font-weight: 800;
+  letter-spacing: 1.6px;
+}
+
+.about-section-heading h3 {
+  margin-top: 7px;
+  color: var(--text);
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(1.35rem, 3vw, 1.9rem);
+  line-height: 1.25;
+}
+
+.about-highlight-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.about-highlight {
+  min-width: 0;
+  min-height: 176px;
+  padding: 21px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: linear-gradient(150deg, rgba(27, 73, 55, .72), rgba(13, 39, 27, .88));
+  transition: border-color .22s ease, transform .22s ease, background-color .22s ease;
+}
+
+.about-highlight:hover {
+  transform: translateY(-3px);
+  border-color: rgba(184, 219, 226, .45);
+}
+
+.about-highlight > i {
+  display: inline-grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border: 1px solid rgba(184, 219, 226, .26);
+  border-radius: 10px;
+  background: rgba(184, 219, 226, .08);
+  color: var(--orange-light);
+}
+
+.about-highlight h4 {
+  margin: 13px 0 5px;
+  color: var(--text);
+  font-family: "Manrope", sans-serif;
+  font-size: .98rem;
+}
+
+.about-highlight p,
+.about-story-card p {
+  color: var(--muted);
+  font-size: .86rem;
+  line-height: 1.75;
+}
+
+.about-story-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.about-story-card {
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: rgba(18, 51, 38, .68);
+}
+
+.about-story-card h3 {
+  margin: 10px 0 9px;
+  color: var(--text);
+  font-family: "Manrope", sans-serif;
+  font-size: 1.13rem;
+  line-height: 1.35;
+}
+
+.about-story-card-featured {
+  border-color: rgba(184, 219, 226, .28);
+  background: linear-gradient(145deg, rgba(27, 73, 55, .84), rgba(13, 39, 27, .95));
+}
+
+.about-service-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 11px;
+}
+
+.about-service-list a {
+  display: grid;
+  min-height: 62px;
+  grid-template-columns: 28px 1fr 18px;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 17px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: rgba(18, 51, 38, .6);
+  color: var(--soft);
+  font-size: .91rem;
+  font-weight: 700;
+  transition: background-color .2s ease, border-color .2s ease, transform .2s ease;
+}
+
+.about-service-list a:hover {
+  transform: translateY(-2px);
+  border-color: rgba(184, 219, 226, .42);
+  background: rgba(27, 73, 55, .8);
+}
+
+.about-service-list a > i:first-child {
+  color: var(--orange-light);
+  font-size: 1rem;
+}
+
+.about-service-list a > i:last-child {
+  color: var(--muted);
+  font-size: .78rem;
+}
+
+.about-profile-actions a:focus-visible,
+.about-service-list a:focus-visible {
+  outline: 2px solid var(--orange-light);
+  outline-offset: 3px;
+}
+
+@media (max-width: 900px) {
+  .about-profile-hero {
+    grid-template-columns: minmax(220px, .75fr) minmax(0, 1.25fr);
+  }
+
+  .about-profile-photo {
+    min-height: 390px;
+  }
+
+  .about-highlight-grid,
+  .about-story-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 650px) {
+  .about-profile-layout {
+    gap: 36px;
+  }
+
+  .about-profile-hero {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+
+  .about-profile-photo {
+    min-height: 330px;
+  }
+
+  .about-profile-copy h2 {
+    font-size: clamp(2rem, 10vw, 3rem);
+  }
+
+  .about-profile-actions {
+    align-items: stretch;
+  }
+
+  .about-profile-actions .btn {
+    flex: 1 1 145px;
+  }
+
+  .about-contact-link {
+    justify-content: center;
+    flex: 1 1 100%;
+  }
+
+  .about-highlight-grid,
+  .about-story-grid,
+  .about-service-list {
+    grid-template-columns: 1fr;
+  }
+
+  .about-highlight {
+    min-height: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-highlight,
+  .about-service-list a {
+    transition: none;
+  }
+
+  .about-highlight:hover,
+  .about-service-list a:hover {
+    transform: none;
+  }
+}
+
+/* Naturalist and bird-watching improvements */
+.about-naturalist-focus {
+  display: grid;
+  grid-template-columns: minmax(210px, .8fr) minmax(0, 1.4fr) auto;
+  align-items: center;
+  gap: 22px;
+  padding: 24px 26px;
+  border: 1px solid rgba(184, 219, 226, .3);
+  border-radius: 14px;
+  background: linear-gradient(110deg, rgba(27, 73, 55, .82), rgba(18, 51, 38, .7));
+}
+
+.about-naturalist-focus h3 {
+  margin-top: 8px;
+  color: var(--text);
+  font-family: "Manrope", sans-serif;
+  font-size: 1.12rem;
+  line-height: 1.35;
+}
+
+.about-naturalist-focus p {
+  color: var(--muted);
+  font-size: .9rem;
+  line-height: 1.75;
+}
+
+.about-naturalist-focus .small-btn {
+  white-space: nowrap;
+}
+
+.bird-home-actions,
+.bird-page-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.bird-home-actions .small-btn {
+  min-height: 42px;
+  padding-inline: 16px;
+  border: 1px solid var(--orange);
+  text-align: center;
+}
+
+.bird-home-actions .bird-home-secondary {
+  border-color: rgba(184, 219, 226, .48);
+  background: transparent;
+  color: var(--soft);
+}
+
+.bird-page-actions {
+  padding-top: 4px;
+}
+
+.bird-page-actions .btn-outline {
+  border-color: rgba(184, 219, 226, .55);
+  color: var(--soft);
+}
+
+.bird-booking-link {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  padding-inline: 8px;
+  color: var(--orange-light);
+  font-size: .85rem;
+  font-weight: 700;
+}
+
+.bird-photo-open {
+  display: block;
+  overflow: hidden;
+  background: var(--panel);
+}
+
+.bird-photo-open:focus-visible {
+  outline: 2px solid var(--orange-light);
+  outline-offset: 3px;
+}
+
+.bird-habitat-card .bird-photo-open img {
+  transition: transform .3s ease;
+}
+
+.bird-habitat-card .bird-photo-open:hover img {
+  transform: scale(1.035);
+}
+
+.bird-tour-details {
+  background:
+    radial-gradient(circle at 90% 10%, rgba(133, 173, 136, .08), transparent 25%),
+    rgba(18, 51, 38, .3);
+}
+
+.bird-tour-intro {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.bird-tour-intro > div {
+  max-width: 720px;
+}
+
+.bird-tour-intro h2,
+.bird-faq-section h2 {
+  margin: 8px 0 12px;
+  color: var(--text);
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  line-height: 1.2;
+}
+
+.bird-tour-intro p,
+.bird-tour-notes p,
+.bird-tour-booking-note {
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.bird-tour-intro .btn {
+  flex: 0 0 auto;
+}
+
+.bird-tour-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.bird-tour-facts > div {
+  display: grid;
+  gap: 5px;
+  min-height: 88px;
+  align-content: center;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: rgba(18, 51, 38, .58);
+}
+
+.bird-tour-facts span {
+  color: var(--muted);
+  font-size: .78rem;
+}
+
+.bird-tour-facts strong {
+  color: var(--text);
+  font-size: .94rem;
+}
+
+.bird-tour-notes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.bird-tour-notes article {
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(10, 33, 22, .55);
+}
+
+.bird-tour-notes h3 {
+  margin-bottom: 8px;
+  color: var(--orange-light);
+  font-family: "Manrope", sans-serif;
+  font-size: 1rem;
+}
+
+.bird-tour-notes p {
+  font-size: .86rem;
+}
+
+.bird-tour-booking-note {
+  margin-top: 18px;
+  font-size: .88rem;
+}
+
+.bird-tour-contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 22px;
+  margin-top: 12px;
+}
+
+.bird-tour-contact a {
+  color: var(--orange-light);
+  font-weight: 700;
+}
+
+.bird-faq-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.bird-faq-grid details {
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: rgba(18, 51, 38, .55);
+}
+
+.bird-faq-grid summary {
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.bird-faq-grid p {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: .88rem;
+  line-height: 1.7;
+}
+
+@media (max-width: 800px) {
+  .about-naturalist-focus {
+    grid-template-columns: 1fr 1.4fr;
+  }
+
+  .about-naturalist-focus .small-btn {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+
+  .bird-tour-facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .bird-tour-notes {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .about-naturalist-focus,
+  .bird-tour-intro {
+    align-items: flex-start;
+    grid-template-columns: 1fr;
+    flex-direction: column;
+  }
+
+  .bird-tour-facts,
+  .bird-faq-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bird-page-actions .btn {
+    flex: 1 1 100%;
+  }
+
+  .bird-home-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .bird-home-actions .small-btn {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bird-habitat-card .bird-photo-open img {
+    transition: none;
+  }
 }
 
 /* Trek itinerary individual cards */
@@ -4085,5 +5172,368 @@ video-modal,
   .booking-form-card,
   .booking-trust-panel {
     animation: none;
+  }
+}
+
+/* Gallery and review updates */
+.gallery-filter-bar {
+  justify-content: flex-start;
+  margin: 0 0 18px;
+}
+
+.masonry-card {
+  cursor: default;
+}
+
+.masonry-card::before {
+  pointer-events: none;
+}
+
+.masonry-image-button {
+  position: relative;
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.masonry-image-button:focus-visible {
+  outline: 2px solid var(--orange-light);
+  outline-offset: -4px;
+}
+
+.masonry-caption {
+  pointer-events: none;
+}
+
+.masonry-card-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin-top: 10px;
+  pointer-events: auto;
+}
+
+.masonry-card-links a {
+  color: var(--orange-light);
+  font-size: 11px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.masonry-card-links a:hover,
+.masonry-card-links a:focus-visible {
+  color: #fff;
+}
+
+.masonry-card-links a:focus-visible,
+.gallery-viewer-actions a:focus-visible {
+  outline: 2px solid var(--orange-light);
+  outline-offset: 3px;
+}
+
+.gallery-empty {
+  padding: 28px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.gallery-empty[hidden] {
+  display: none;
+}
+
+.site-page .gallery-scroll-container {
+  overflow: visible;
+  direction: ltr;
+}
+
+.site-page .gallery-scroll-container .masonry-gallery {
+  display: grid;
+  width: 100%;
+  max-width: 100%;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  direction: ltr;
+}
+
+.site-page .gallery-scroll-container .masonry-card {
+  flex: initial;
+  grid-column: auto;
+  width: auto;
+  height: 320px;
+  min-height: 0;
+  direction: ltr;
+}
+
+.site-page .gallery-scroll-container .masonry-card--feature,
+.site-page .gallery-scroll-container .masonry-card--wide {
+  grid-column: span 2;
+}
+
+.gallery-viewer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 18px;
+  margin-top: 14px;
+}
+
+.gallery-viewer-actions a {
+  color: var(--orange-light);
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.gallery-viewer-actions a[hidden] {
+  display: none;
+}
+
+.reviews-section {
+  background: linear-gradient(180deg, rgba(18, 51, 38, .32), rgba(7, 20, 14, .62));
+}
+
+.review-invitation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  padding: clamp(22px, 4vw, 38px);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: linear-gradient(120deg, rgba(18, 51, 38, .92), rgba(10, 32, 22, .96));
+  box-shadow: 0 18px 35px rgba(0, 0, 0, .18);
+}
+
+.review-invitation > div {
+  max-width: 700px;
+}
+
+.review-kicker {
+  color: var(--orange-light);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.review-invitation h2 {
+  margin: 8px 0 10px;
+  color: var(--text);
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(1.35rem, 3vw, 2rem);
+  line-height: 1.25;
+}
+
+.review-invitation p {
+  color: var(--muted);
+  font-size: .92rem;
+  line-height: 1.8;
+}
+
+.review-invitation .btn {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 9px;
+  color: #fff;
+}
+
+@media (max-width: 900px) {
+  .site-page .gallery-scroll-container .masonry-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 650px) {
+  .review-invitation {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .review-invitation .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .site-page .gallery-scroll-container .masonry-gallery {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .site-page .gallery-scroll-container .masonry-card--feature,
+  .site-page .gallery-scroll-container .masonry-card--wide {
+    grid-column: auto;
+  }
+
+  .site-page .gallery-scroll-container .masonry-card {
+    height: min(82vw, 360px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .masonry-card,
+  .masonry-card img {
+    transition: none;
+  }
+
+  .masonry-card:hover {
+    transform: none;
+  }
+}
+
+.booking-field .booking-optional,
+.booking-field small {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.booking-consent {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  margin-top: 20px;
+}
+
+.booking-consent input {
+  width: 18px;
+  height: 18px;
+  margin-top: 3px;
+  accent-color: var(--green);
+}
+
+.booking-consent label {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.booking-consent a,
+.booking-policy-links a {
+  color: var(--orange-light);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.booking-consent input:focus-visible,
+.booking-new-inquiry:focus-visible,
+.booking-policy-links a:focus-visible {
+  outline: 2px solid var(--orange-light);
+  outline-offset: 3px;
+}
+
+.booking-submit:disabled {
+  cursor: not-allowed;
+  opacity: .72;
+}
+
+.booking-new-inquiry {
+  display: inline-flex;
+  min-height: 42px;
+  margin: 12px 0 0 10px;
+  padding: 9px 15px;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--soft);
+}
+
+.booking-new-inquiry[hidden] {
+  display: none;
+}
+
+.booking-new-inquiry:hover {
+  border-color: var(--orange-light);
+  color: var(--orange-light);
+}
+
+.booking-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  line-height: 1.7;
+}
+
+.booking-note i {
+  flex: 0 0 auto;
+  margin-top: 4px;
+  color: var(--green);
+}
+
+.booking-policy-note {
+  margin-top: 12px;
+  padding-left: 13px;
+  border-left: 2px solid var(--orange);
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.booking-policy-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  margin-top: 15px;
+  font-size: 11px;
+}
+
+.booking-summary {
+  margin-bottom: 26px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, .025);
+}
+
+.booking-summary h2 {
+  margin: 6px 0 16px;
+}
+
+.booking-summary dl {
+  display: grid;
+  gap: 12px;
+}
+
+.booking-summary dl > div {
+  display: grid;
+  grid-template-columns: minmax(95px, .72fr) minmax(0, 1.28fr);
+  gap: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+.booking-summary dt {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.booking-summary dd {
+  color: var(--soft);
+  font-size: 12px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.booking-summary > p {
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+@media (max-width: 560px) {
+  .booking-new-inquiry {
+    width: 100%;
+    justify-content: center;
+    margin-left: 0;
+  }
+
+  .booking-policy-links {
+    gap: 9px 14px;
   }
 }

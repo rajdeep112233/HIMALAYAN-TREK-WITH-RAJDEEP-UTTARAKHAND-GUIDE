@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rajdeep112233.github.io/HIMALAYAN-TREK-WITH-RAJDEEP-UTTARAKHAND-GUIDE/sitemap.xml
